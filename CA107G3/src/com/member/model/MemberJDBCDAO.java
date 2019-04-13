@@ -226,7 +226,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //		MemberVo mb2_up = new MemberVo("王妍熙6", "val5080809", "zld2502888", "M", "0932145698", "3", b, 700d, "小三");
 //		System.out.println(mb2_up);
 //		memberDAO.update(mb2_up);
-
+ 
 		// 刪除
 		memberDAO.delete("M000007");
 
