@@ -1,4 +1,4 @@
---�إߪ���: 
+--建立表格: 
 --------------------------------------------------------------------------------------------------------
 DROP TABLE RESTAURANT_RESPONSES;
 DROP TABLE FRIEND_LIST;
@@ -55,7 +55,7 @@ DROP SEQUENCE WAIT_POS_SEQ;
 ----------------------------------------------------------------
 alter session set nls_date_format = 'dd/MON/yyyy hh24:mi:ss';
 ----------------------------------------------------------------
---�|��
+--會員
 CREATE TABLE MEMBER  ( 								
   MEM_NO 			VARCHAR2(7 BYTE) 	NOT NULL
 , MEM_NAME 			VARCHAR2(10 BYTE)	NOT NULL UNIQUE
@@ -72,24 +72,24 @@ CREATE TABLE MEMBER  (
 , CONSTRAINT MEMBER_MEM_NO_PK PRIMARY KEY (MEM_NO)
 );
 --SEQUENCE MEM_NO
-CREATE SEQUENCE MEMBER_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1				   -- �C���W�[�ƶq
-START WITH 1				   -- �q1�}�l
-NOMAXVALUE					   -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE MEMBER_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1				   -- 每次增加數量
+START WITH 1				   -- 從1開始
+NOMAXVALUE					   -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 --
--- �d��:
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'���j��','qq123','aa123','M','qq123@gmail.com','A123456789','0800092000','2',NULL,399,'���A');
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'�i���E','yen1888152','yen1888152','M','qaz123@gmail.com','H107242497','0970268373','1',NULL,499,'�ª�');
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'�i�ѧ�','nbx2973446','nbx2973446','M','sapien@metuean.com','A132729384','0988647356','3',NULL,599,'?������');
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'�i�p','utx7773166','utx7773166','F','Proin@dolorDgla.com','A116709980','0953147021','3',NULL,699,'��s?�ʴ�');
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'���j��','wzq0833787','pvq0699636','F','at.velit.Cras@orci.edu','A162110259','0963418454','1',NULL,799,'?���X��');
-INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'���R��','val5080809','val5080809','F','monulus@faucibusleoin.org','F172002312','0930779472','2',NULL,899,'�D?�հ�');
+-- 範例:
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'王大衛','qq123','aa123','M','qq123@gmail.com','A123456789','0800092000','2',NULL,399,'海鮮');
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'張正浩','yen1888152','yen1888152','M','qaz123@gmail.com','H107242497','0970268373','1',NULL,499,'黑狗');
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'張天志','nbx2973446','nbx2973446','M','sapien@metuean.com','A132729384','0988647356','3',NULL,599,'?昏乖離');
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'張峰','utx7773166','utx7773166','F','Proin@dolorDgla.com','A116709980','0953147021','3',NULL,699,'木製?百景');
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'葉大雄','wzq0833787','pvq0699636','F','at.velit.Cras@orci.edu','A162110259','0963418454','1',NULL,799,'?角幾何');
+INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),'源靜香','val5080809','val5080809','F','monulus@faucibusleoin.org','F172002312','0930779472','2',NULL,899,'呻?幽鬼');
 -- INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?,NULL,?,?)
 --------------------------------------------------------------------------------------------------
---�t��
+--廠商
 CREATE TABLE VENDOR  (
   VENDOR_NO 		VARCHAR2(7 BYTE) 	NOT NULL
 , V_ACCOUNT 		VARCHAR2(10 BYTE) 	NOT NULL UNIQUE 
@@ -123,21 +123,21 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
--- �d��:
+-- 範例:
 INSERT INTO VENDOR VALUES ('V'||LPAD(to_char(VENDOR_SEQ.NEXTVAL), 6, '0'),'jkl8519653','jkl8519653','jkl8519653@gmail.com','81017799','02','244',
- '�x�_��','�H�q��','������45���x�_101�ʪ�����','056540248677','������',1,1,1,'0900','2000','1111100','8',NULL,NULL,'0');
+ '台北市','信義區','市府路45號台北101購物中心','056540248677','鼎泰豐',1,1,1,'0900','2000','1111100','8',NULL,NULL,'0');
  INSERT INTO VENDOR VALUES ('V'||LPAD(to_char(VENDOR_SEQ.NEXTVAL), 6, '0'),'rmv6574499','rmv6574499','rmv6574499@gmail.com','27239987','02','110',
-'�x�_��','�H�q��','�Q�ظ�9��','15585812545','�˫�����Ʋz - �x�_�T�V�H�q��',1,1,1,'0900','2000','1111100','2',NULL,NULL,'1');
+'台北市','信義區','松壽路9號','15585812545','瓦城泰國料理 - 台北三越信義店',1,1,1,'0900','2000','1111100','2',NULL,NULL,'1');
  INSERT INTO VENDOR VALUES ('V'||LPAD(to_char(VENDOR_SEQ.NEXTVAL), 6, '0'),'cth9614531','cth9614531','cth9614531@gmail.com','24652222','04','407',
- '�x����','��ٰ�','��w�@��168��','13953979422','�ΰ��N�װ�w��',1,1,1,'1600','2300','1111111','4',NULL,NULL,'2');
+ '台中市','西屯區','國安一路168號','13953979422','屋馬燒肉國安店',1,1,1,'1600','2300','1111111','4',NULL,NULL,'2');
  INSERT INTO VENDOR VALUES ('V'||LPAD(to_char(VENDOR_SEQ.NEXTVAL), 6, '0'),'dfh3689153','dfh3689153','dfh3689153@gmail.com','22271927','04','400',
- '�x����','����','���s��20��','18839540972','�c�체��',99,99,99,'1300','1700','1111111','0.5',NULL,NULL,'3');
+ '台中市','中區','中山路20號','18839540972','宮原眼科',99,99,99,'1300','1700','1111111','0.5',NULL,NULL,'3');
  INSERT INTO VENDOR VALUES ('V'||LPAD(to_char(VENDOR_SEQ.NEXTVAL), 6, '0'),'leg0543027','leg0543027','leg0543027@gmail.com','2165711','07','801',
- '������','�e����','�s�и�207��','15984315231','���}���|�»�����',55,66,77,'1300','1700','0101010','4',NULL,NULL,'4');
+ '高雄市','前金區','新田路207號','15984315231','辣癮食尚麻辣火鍋',55,66,77,'1300','1700','0101010','4',NULL,NULL,'4');
 
 
 ------------------------------------------------------------------------------------------------------------------------------
---�Ԧ����
+--候位明細
 CREATE TABLE WAIT_POS (
   WAIT_NO 			VARCHAR2(10 BYTE)	NOT NULL
 , MEM_NO 			VARCHAR2(7 BYTE) 	NOT NULL
@@ -162,7 +162,7 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
---�d��:
+--範例:
 INSERT INTO WAIT_POS VALUES ('WP'||LPAD(to_char(WAIT_POS_SEQ.NEXTVAL), 8, '0'),'M000001','V000001',10,7,sysdate,3,2);
 INSERT INTO WAIT_POS VALUES ('WP'||LPAD(to_char(WAIT_POS_SEQ.NEXTVAL), 8, '0'),'M000002','V000001',15,6,sysdate,3,2);
 INSERT INTO WAIT_POS VALUES ('WP'||LPAD(to_char(WAIT_POS_SEQ.NEXTVAL), 8, '0'),'M000003','V000003',16,1,sysdate,3,2);
@@ -171,7 +171,7 @@ INSERT INTO WAIT_POS VALUES ('WP'||LPAD(to_char(WAIT_POS_SEQ.NEXTVAL), 8, '0'),'
 
 
 -----------------------------------------------------------------
---�\�U���|�M��
+--餐廳檢舉清單
 CREATE TABLE REP_RES (
   REP_RES_NO 		VARCHAR2(10 BYTE) 	NOT NULL
 , MEM_NO 			VARCHAR2(7 BYTE) 	NOT NULL
@@ -194,14 +194,14 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
---�d��:
-INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000001','V000001','�F������Y',sysdate,'2');
-INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000002','V000002','�A�ȺA�פ��n',sysdate,'1');
-INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000003','V000003','����������',sysdate,'3');
-INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000004','V000004','�n����LINE',sysdate,'1');
-INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000005','V000005','�ڬO�Ӷê�',sysdate,'3');
+--範例:
+INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000001','V000001','東西太難吃',sysdate,'2');
+INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000002','V000002','服務態度不好',sysdate,'1');
+INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000003','V000003','店員長太醜',sysdate,'3');
+INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000004','V000004','要不到LINE',sysdate,'1');
+INSERT INTO REP_RES VALUES ('RR'||LPAD(to_char(REP_RES_SEQ.NEXTVAL), 8, '0'),'M000005','V000005','我是來亂的',sysdate,'3');
 -----------------------------------------------------------------
---���é��a�M��
+--收藏店家清單
 CREATE TABLE FAV_RES (
   MEM_NO 			VARCHAR2(7 BYTE) NOT NULL
 , VENDOR_NO 		VARCHAR2(7 BYTE) NOT NULL
@@ -212,14 +212,14 @@ CREATE TABLE FAV_RES (
 , CONSTRAINT FAV_RES_MEM_NO_VEN_DOR_NO_PK	PRIMARY KEY (MEM_NO,VENDOR_NO )
 );
 
---�d��:
+--範例:
 INSERT INTO FAV_RES VALUES ('M000001','V000001');
 INSERT INTO FAV_RES VALUES ('M000002','V000002');
 INSERT INTO FAV_RES VALUES ('M000003','V000003');
 INSERT INTO FAV_RES VALUES ('M000004','V000004');
 INSERT INTO FAV_RES VALUES ('M000005','V000005');
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
---���   �഼
+--桌位   丞智
 
 CREATE TABLE TABLES (
     TBL_NO      VARCHAR2(7 BYTE),
@@ -250,7 +250,7 @@ INSERT INTO TABLES VALUES ('T'||LPAD(to_char(tables_seq.NEXTVAL), 6, '0'),'V0000
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 --
---�q��   �഼
+--訂單   丞智
 
 CREATE TABLE ORD (
     ORD_NO          VARCHAR2(15),
@@ -284,7 +284,7 @@ CREATE SEQUENCE ORD_SEQ INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
 
 
 INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000001','V000001','T000001',5,NULL,NULL,NULL,sysdate,TO_DATE('2019-03-31', 'YYYY-MM-DD'),'10:30',NULL,1600,NULL,NULL,'qL62THYwvZuVkka2aDTt',1);
-INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000002','V000002','T000001',2,'M000002',NULL,400,sysdate,TO_DATE('2019-03-31', 'YYYY-MM-DD'),'11:00','�е��ھa������m',1000,'11:10','12:05','Q3DbGZ4tHLYHa7NdHwSx',1);
+INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000002','V000002','T000001',2,'M000002',NULL,400,sysdate,TO_DATE('2019-03-31', 'YYYY-MM-DD'),'11:00','請給我靠窗的位置',1000,'11:10','12:05','Q3DbGZ4tHLYHa7NdHwSx',1);
 INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000003','V000003','T000001',1,NULL,NULL,NULL,sysdate,TO_DATE('2019-04-01', 'YYYY-MM-DD'),'14:30',NULL,500,NULL,NULL,'nFaa5DJu7SqvZqXNmjSz',2);
 INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000004','V000004','T000001',6,'M000003','M000004',2000,sysdate,TO_DATE('2019-04-01', 'YYYY-MM-DD'),'17:00',NULL,3000,NULL,NULL,'H6xLzWZykL3ArVV9xFJp',3);
 INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.NEXTVAL), 6, '0'),'M000005','V000005','T000001',4,'M000003',NULL,2000,sysdate,TO_DATE('2019-04-10', 'YYYY-MM-DD'),'19:30',NULL,5000,NULL,NULL,'8JPXY6wQc5bvrN2y6h4h',3);
@@ -292,7 +292,7 @@ INSERT INTO ORD VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.N
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
---�\�U�b��������  �f�Q
+--餐廳帳戶交易明細  柏熹
 CREATE TABLE RES_TRANSACTION_LIST  (                 
   TRST_NO       VARCHAR2(10 BYTE) 
 , VENDOR_NO     VARCHAR2(7 BYTE)  NOT NULL
@@ -308,12 +308,12 @@ CREATE TABLE RES_TRANSACTION_LIST  (
 , CONSTRAINT RTL_TRST_NO_PK PRIMARY KEY (TRST_NO)
 ); 
 --SEQUENCE TRST_NO
-CREATE SEQUENCE RES_T_L_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                  -- �C���W�[�ƶq
-START WITH 1                    -- �q1�}�l
-NOMAXVALUE                      -- �S���̤j��
-NOCYCLE                         -- ���`��
-NOCACHE;                        -- ���֨�,����� 
+CREATE SEQUENCE RES_T_L_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                  -- 每次增加數量
+START WITH 1                    -- 從1開始
+NOMAXVALUE                      -- 沒有最大值
+NOCYCLE                         -- 不循環
+NOCACHE;                        -- 不快取,防止掉號 
 
 INSERT INTO RES_TRANSACTION_LIST VALUES ('RTL'||LPAD(to_char(RES_T_L_SEQ.NEXTVAL), 7, '0'),'V000001','1000',sysdate,to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'01');
 INSERT INTO RES_TRANSACTION_LIST VALUES ('RTL'||LPAD(to_char(RES_T_L_SEQ.NEXTVAL), 7, '0'),'V000002','2000',sysdate,to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'02');
@@ -322,11 +322,11 @@ INSERT INTO RES_TRANSACTION_LIST VALUES ('RTL'||LPAD(to_char(RES_T_L_SEQ.NEXTVAL
 INSERT INTO RES_TRANSACTION_LIST VALUES ('RTL'||LPAD(to_char(RES_T_L_SEQ.NEXTVAL), 7, '0'),'V000005','5000',sysdate,to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'05');
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---�\�U�}��q��ɬq   �f�Q
+--餐廳開放訂位時段   柏熹
 
 CREATE TABLE RESERVATION_TIME  (                
   RT_NO       VARCHAR2(10 BYTE) 
-, VENDOR_NO   VARCHAR2(7 BYTE)  NOT NULL--������Ʈ榡���~
+, VENDOR_NO   VARCHAR2(7 BYTE)  NOT NULL--原表格資料格式有誤
 , R_TIME      VARCHAR2(10 BYTE)
 --FK
 , CONSTRAINT RT_VENDOR_NO_FK FOREIGN KEY (VENDOR_NO) REFERENCES VENDOR (VENDOR_NO)
@@ -334,12 +334,12 @@ CREATE TABLE RESERVATION_TIME  (
 , CONSTRAINT RT_RT_NO_PK PRIMARY KEY (RT_NO)
 ); 
 --SEQUENCE TRST_NO
-CREATE SEQUENCE RESERVATION_T_SEQ -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1           -- �C���W�[�ƶq
-START WITH 1           -- �q1�}�l
-NOMAXVALUE             -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;             -- ���֨�,�����
+CREATE SEQUENCE RESERVATION_T_SEQ -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1           -- 每次增加數量
+START WITH 1           -- 從1開始
+NOMAXVALUE             -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;             -- 不快取,防止掉號
 
 INSERT INTO RESERVATION_TIME VALUES ('RT'||LPAD(to_char(RESERVATION_T_SEQ.NEXTVAL), 8, '0'),'V000001',TO_CHAR(1800,'0000'));
 INSERT INTO RESERVATION_TIME VALUES ('RT'||LPAD(to_char(RESERVATION_T_SEQ.NEXTVAL), 8, '0'),'V000002',TO_CHAR(1100,'0000'));
@@ -347,10 +347,10 @@ INSERT INTO RESERVATION_TIME VALUES ('RT'||LPAD(to_char(RESERVATION_T_SEQ.NEXTVA
 INSERT INTO RESERVATION_TIME VALUES ('RT'||LPAD(to_char(RESERVATION_T_SEQ.NEXTVAL), 8, '0'),'V000004',TO_CHAR(1300,'0000'));
 INSERT INTO RESERVATION_TIME VALUES ('RT'||LPAD(to_char(RESERVATION_T_SEQ.NEXTVAL), 8, '0'),'V000005',TO_CHAR(1700,'0000'));
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---�\�U���}����    �f�Q
+--餐廳不開放日期    柏熹
 CREATE TABLE EXCEPTION_DATE  ( 								
-  EXC_NO			VARCHAR2(10 BYTE) --���ƫ��A���~
-, VENDOR_NO			VARCHAR2(7 BYTE)  NOT NULL--������Ʈ榡���~
+  EXC_NO			VARCHAR2(10 BYTE) --原資料型態有誤
+, VENDOR_NO			VARCHAR2(7 BYTE)  NOT NULL--原表格資料格式有誤
 , EXC_DATE 			DATE
 --FK
 , CONSTRAINT EXCEPTION_DATE_NO_FK FOREIGN KEY (VENDOR_NO) REFERENCES VENDOR (VENDOR_NO)
@@ -358,25 +358,25 @@ CREATE TABLE EXCEPTION_DATE  (
 , CONSTRAINT EXCEPTION_DATE_EXC_NO_PK PRIMARY KEY (EXC_NO)
 ); 
 --SEQUENCE TRST_NO
-CREATE SEQUENCE EXCEPTION_DATE_SEQ -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1				   -- �C���W�[�ƶq
-START WITH 1				   -- �q1�}�l
-NOMAXVALUE					   -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE; 					   -- ���֨�,�����
+CREATE SEQUENCE EXCEPTION_DATE_SEQ -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1				   -- 每次增加數量
+START WITH 1				   -- 從1開始
+NOMAXVALUE					   -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE; 					   -- 不快取,防止掉號
 
-INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000001',to_date('25-7��-18','DD-MON-RR'));
-INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000002',to_date('23-7��-18','DD-MON-RR'));
-INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000003',to_date('22-7��-18','DD-MON-RR'));
-INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000004',to_date('21-7��-18','DD-MON-RR'));
-INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000005',to_date('20-7��-18','DD-MON-RR'));
+INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000001',to_date('25-7月-18','DD-MON-RR'));
+INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000002',to_date('23-7月-18','DD-MON-RR'));
+INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000003',to_date('22-7月-18','DD-MON-RR'));
+INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000004',to_date('21-7月-18','DD-MON-RR'));
+INSERT INTO EXCEPTION_DATE VALUES ('ED'||LPAD(to_char(EXCEPTION_DATE_SEQ.NEXTVAL), 8, '0'),'V000005',to_date('20-7月-18','DD-MON-RR'));
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
 
---�\�U�w�q���ƶq   �f�Q
+--餐廳已訂桌位數量   柏熹
 CREATE TABLE RESERVATION_TABLE_ORDERED  (                               
   RTO_NO            VARCHAR2(10) 
-, VENDOR_NO         VARCHAR2(7 BYTE)  NOT NULL--������Ʈ榡���~
+, VENDOR_NO         VARCHAR2(7 BYTE)  NOT NULL--原表格資料格式有誤
 , BOOKING_DATE      DATE
 , BOOKING_TIME      VARCHAR2(5)
 , TBL_O_NUM1       NUMBER(10)
@@ -396,25 +396,25 @@ CREATE TABLE RESERVATION_TABLE_ORDERED  (
 , CONSTRAINT RTO_RTO_NO_PK PRIMARY KEY (RTO_NO)
 ); 
 --SEQUENCE TRST_NO
-CREATE SEQUENCE RESERVATION_TABLE_ORDERED_SEQ -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                 -- �C���W�[�ƶq
-START WITH 1                   -- �q1�}�l
-NOMAXVALUE                     -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE RESERVATION_TABLE_ORDERED_SEQ -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                 -- 每次增加數量
+START WITH 1                   -- 從1開始
+NOMAXVALUE                     -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 
-INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000001',to_date('20-7��-18','DD-MON-RR'),'12:00',2,2,2,2,0,2,1,1,1,0);
-INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000002',to_date('20-8��-18','DD-MON-RR'),'17:00',3,2,2,2,0,1,2,1,1,0);
-INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000003',to_date('20-9��-18','DD-MON-RR'),'20:00',4,2,2,2,0,1,1,1,1,0);
-INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000004',to_date('20-10��-18','DD-MON-RR'),'13:00',2,3,2,2,0,1,1,2,1,0);
-INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000005',to_date('20-11��-18','DD-MON-RR'),'11:00',3,2,3,2,0,2,1,2,1,0);
+INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000001',to_date('20-7月-18','DD-MON-RR'),'12:00',2,2,2,2,0,2,1,1,1,0);
+INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000002',to_date('20-8月-18','DD-MON-RR'),'17:00',3,2,2,2,0,1,2,1,1,0);
+INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000003',to_date('20-9月-18','DD-MON-RR'),'20:00',4,2,2,2,0,1,1,1,1,0);
+INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000004',to_date('20-10月-18','DD-MON-RR'),'13:00',2,3,2,2,0,1,1,2,1,0);
+INSERT INTO RESERVATION_TABLE_ORDERED VALUES ('RTO'||LPAD(to_char(RESERVATION_TABLE_ORDERED_SEQ.NEXTVAL), 7, '0'),'V000005',to_date('20-11月-18','DD-MON-RR'),'11:00',3,2,3,2,0,2,1,2,1,0);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---�\�U�}��q����ƶq   �f�Q
+--餐廳開放訂位桌位數量   柏熹
 CREATE TABLE RESERVATION_TABLE_NUMBER  (                                
   RTN_NO            VARCHAR2(10) 
-, VENDOR_NO         VARCHAR2(7 BYTE)  NOT NULL--������Ʈ榡���~
+, VENDOR_NO         VARCHAR2(7 BYTE)  NOT NULL--原表格資料格式有誤
 , RTBL_O_NUM1         NUMBER
 , RTBL_O_NUM2         NUMBER
 , RTBL_O_NUM3         NUMBER
@@ -427,12 +427,12 @@ CREATE TABLE RESERVATION_TABLE_NUMBER  (
 , CONSTRAINT RTN_RTN_NO_PK PRIMARY KEY (RTN_NO)
 ); 
 --SEQUENCE TRST_NO
-CREATE SEQUENCE RESERVATION_TABLE_NUMBER_SEQ -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                 -- �C���W�[�ƶq
-START WITH 1                   -- �q1�}�l
-NOMAXVALUE                     -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE RESERVATION_TABLE_NUMBER_SEQ -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                 -- 每次增加數量
+START WITH 1                   -- 從1開始
+NOMAXVALUE                     -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 INSERT INTO RESERVATION_TABLE_NUMBER VALUES ('ETN'||LPAD(to_char(RESERVATION_TABLE_NUMBER_SEQ.NEXTVAL), 7, '0'),'V000001',5,3,5,3,5);
 INSERT INTO RESERVATION_TABLE_NUMBER VALUES ('ETN'||LPAD(to_char(RESERVATION_TABLE_NUMBER_SEQ.NEXTVAL), 7, '0'),'V000002',4,5,4,2,6);
@@ -441,7 +441,7 @@ INSERT INTO RESERVATION_TABLE_NUMBER VALUES ('ETN'||LPAD(to_char(RESERVATION_TAB
 INSERT INTO RESERVATION_TABLE_NUMBER VALUES ('ETN'||LPAD(to_char(RESERVATION_TABLE_NUMBER_SEQ.NEXTVAL), 7, '0'),'V000005',3,6,4,2,4);
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---�\�U���M��  �m��
+--餐廳菜單清單  雋捷
 
 CREATE TABLE RESTAURANT_MENU  (                                 
   MENU_NO           VARCHAR2(10 BYTE) NOT NULL
@@ -458,31 +458,31 @@ CREATE TABLE RESTAURANT_MENU  (
 
 );
 --SEQUENCE MEM_NO
-CREATE SEQUENCE RESTAURANT_MENU_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                 -- �C���W�[�ƶq
-START WITH 1                   -- �q1�}�l
-NOMAXVALUE                     -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE RESTAURANT_MENU_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                 -- 每次增加數量
+START WITH 1                   -- 從1開始
+NOMAXVALUE                     -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 INSERT INTO RESTAURANT_MENU VALUES ('RM'||LPAD(to_char(RESTAURANT_MENU_SEQ.NEXTVAL), 8, '0')
-    ,'V000001','�������','777',null,1,'�ҥH�ڻ�������ĩO�H');
+    ,'V000001','炸鳳尾蝦','777',null,1,'所以我說那個醬汁呢？');
 
 INSERT INTO RESTAURANT_MENU VALUES ('RM'||LPAD(to_char(RESTAURANT_MENU_SEQ.NEXTVAL), 8, '0')
-    ,'V000002','���G�T����','9000',null,1,'���u�O�ӿب�F�Цw�A�A���}�A�v��¶�F�@�j��A�̫��F���ҬɡA���M�O�A���Q�Ǫ��A�A�v�Ū��Ʋz�A�ҥH���O�A�H�̲߳��٬O�n�^��G�m�Ӫ�');
+    ,'V000002','豆腐三重奏','9000',null,1,'那真是太諷刺了紹安，你離開你師傅繞了一大圈，最後到達的境界，竟然是你不想學的，你師傅的料理，所以說呢，人心最終還是要回到故鄉來的');
 
 INSERT INTO RESTAURANT_MENU VALUES ('RM'||LPAD(to_char(RESTAURANT_MENU_SEQ.NEXTVAL), 8, '0')
-    ,'V000003','�k���M�J','30',null,1,'���J�a�`��A��߫K�y��');
+    ,'V000003','法式烘蛋','30',null,1,'雞蛋家常菜，佛心便宜賣');
 
 INSERT INTO RESTAURANT_MENU VALUES ('RM'||LPAD(to_char(RESTAURANT_MENU_SEQ.NEXTVAL), 8, '0')
-    ,'V000004','���ѹC�s��K','65536',null,1,'�o����ͥs�Z���a�A�A���S���Q�L�~�|�������H�A�쩳�u���b�l�D����O,���ɭԧڹ�A�̻��n�A�Ӥ@�L�A�ä��O�]���{�l�j�~�����A���O�]���A���Ʋz��p���a���Ʋz�A�u���ܦn�Y�A�i�O�A�o�ڵ��F�ڡA�ڹ�b���A�P��D�`��ѡA�D�`�i���A���٬O�Z�ջ��a�A�A�����D���O�p���A�ӬO�A���H�榳���D�C');
+    ,'V000004','雖敗遊龍鍋貼','65536',null,1,'這位先生叫武雄吧，你有沒有想過品嚐美食的人，到底真正在追求什麼呢,那時候我對你們說要再來一盤，並不是因為肚子餓才說的，那是因為你的料理跟小當家的料理，真的很好吃，可是你卻拒絕了我，我實在為你感到非常遺憾，非常可惜，我還是坦白說吧，你的問題不是廚藝，而是你的人格有問題。');
 
 INSERT INTO RESTAURANT_MENU VALUES ('RM'||LPAD(to_char(RESTAURANT_MENU_SEQ.NEXTVAL), 8, '0')
-    ,'V000005','�S�żp�v�p���a�����\','9487',null,1,'���H���зN�o���ϥH���R���t�ӱ����A�A���ӷP��F�\�C�h�F���Q���O�M�ޥ����I�g�A���O�p�v���P�R�ˡC�A�����Ʋz�S�����������n�A�A�٬O�^�h�i�m21�p�ɦA�ӧa ');
+    ,'V000005','特級廚師小當家豪華餐','9487',null,1,'平淡的創意卻企圖以華麗表演來掩飾，你應該感到慚愧。貧乏的想像力和技巧的沉迷，都是廚師的致命傷。你做的料理沒有評分的必要，你還是回去磨練21小時再來吧 ');
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---�q����� --�഼
+--訂單明細 --丞智
 
 CREATE TABLE ORDER_DETAIL (
    ORD_NO    VARCHAR2(15)
@@ -505,7 +505,7 @@ INSERT INTO ORDER_DETAIL VALUES (to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------
---����   --�഼
+--評論   --丞智
 CREATE TABLE COMMENTS (
     CMNT_NO       VARCHAR2(7),
     ORD_NO        VARCHAR2(15) NOT NULL,
@@ -523,15 +523,15 @@ CREATE TABLE COMMENTS (
 
 CREATE SEQUENCE COMMENTS_SEQ INCREMENT BY 1 START WITH 1 NOMAXVALUE NOCYCLE NOCACHE;
 
-INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000001',4,'�a�I�ܤ�K�A�F�񱶹B���A���������u����^�ܦn�A�A�X�˪B�n�͡B���Q�E�\�B��ߨơA�~�[�W���������A�A�ȭ��M���A���˵��j�a�o���u���\�U�C',CURRENT_TIMESTAMP ,1);
-INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000002',4,'���\���ҫܦn�A�����A�ȿˤ��A���˨ӥ��\�I�\�I����X�z�A�a�I�]�b�����ߡA�Q����K�I�D�`�A�X�B�͡B���Q�E�\�I',CURRENT_TIMESTAMP ,1);
-INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000003',4,'�F���ܫܦh�A���ҵξA�A�H���A�Ȥ]�ˤ�? ���ޮa�x�E�|�A�B�ͤp�u�A���Q���\�ҩy �b�F�ϧA���䤤�@�ӿ��',CURRENT_TIMESTAMP ,1);
-INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000004',5,'�ӤH�D�`�R�q���Ʋz�A�ר�O���ġA�o�������ĬO���֪��A�@���j���N�O�@�H���A�i�H�I�n�X�ؤf���@�_���ɡA�n�Y�C',CURRENT_TIMESTAMP ,1);
-INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000005',3,'�p�G�H�q���\�U�ӻ��A�ڻ{���o�ӻ��즳��n����ܡA���L�b���P�����̭��A�٬O���@�w�����ǡA���w���٦�life band�A�ӷ~���\okay',CURRENT_TIMESTAMP ,1);
+INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000001',4,'地點很方便，鄰近捷運站，店裡環境優美氣氛很好，適合親朋好友、情侶聚餐、聊心事，外加上食物美味，服務員和善，推薦給大家這個優質餐廳。',CURRENT_TIMESTAMP ,1);
+INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000002',4,'用餐環境很好，店員服務親切，推薦來用餐！餐點價格合理，地點也在市中心，十分方便！非常適合朋友、情侶聚餐！',CURRENT_TIMESTAMP ,1);
+INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000003',4,'東西選擇很多，環境舒適，人員服務也親切? 不管家庭聚會，朋友小酌，情侶用餐皆宜 在東區你的其中一個選擇',CURRENT_TIMESTAMP ,1);
+INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000004',5,'個人非常愛義式料理，尤其是披薩，這間的披薩是薄皮的，一份大概就是一人份，可以點好幾種口味一起分享，好吃。',CURRENT_TIMESTAMP ,1);
+INSERT INTO COMMENTS VALUES ('C'||LPAD(to_char(comments_seq.NEXTVAL), 6, '0'),to_char(sysdate,'yyyymmdd')||'-'||LPAD(to_char(ord_seq.CURRVAL), 6, '0'),'V000005',3,'如果以義式餐廳來說，我認為這個價位有更好的選擇，不過在五星飯店裡面，還是有一定的水準，不定時還有life band，商業午餐okay',CURRENT_TIMESTAMP ,1);
 
 --------------------------------------------------------------------------------------------------------
---���T
---��x���u
+--承豊
+--後台員工
 CREATE TABLE EMPLOYEE (
   EMP_NO VARCHAR2(10) NOT NULL 
 , EMP_NAME VARCHAR2(20) NOT NULL 
@@ -554,15 +554,15 @@ NOCYCLE
 NOCACHE;
 
 
-INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'�L�T��','M','Jimmy123','123',TO_DATE('2019-03-28','YYYY-MM-DD'),TO_DATE('2019-03-30','YYYY-MM-DD'),2);
-INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'��v��','M','Bob123','123',TO_DATE('2019-03-20','YYYY-MM-DD'),TO_DATE('2019-03-30','YYYY-MM-DD'),2);
-INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'�L���T','M','Chris123','123',TO_DATE('2016-03-15','YYYY-MM-DD'),TO_DATE('2019-01-30','YYYY-MM-DD'),2);
-INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'�d�ç�','M','Peter123','123',TO_DATE('2000-03-20','YYYY-MM-DD'),NULL,1);
-INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'�d�a��','M','David123','123',TO_DATE('2008-03-20','YYYY-MM-DD'),NULL,1);
+INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'林俊傑','M','Jimmy123','123',TO_DATE('2019-03-28','YYYY-MM-DD'),TO_DATE('2019-03-30','YYYY-MM-DD'),2);
+INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'游宗叡','M','Bob123','123',TO_DATE('2019-03-20','YYYY-MM-DD'),TO_DATE('2019-03-30','YYYY-MM-DD'),2);
+INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'林承豊','M','Chris123','123',TO_DATE('2016-03-15','YYYY-MM-DD'),TO_DATE('2019-01-30','YYYY-MM-DD'),2);
+INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'吳永志','M','Peter123','123',TO_DATE('2000-03-20','YYYY-MM-DD'),NULL,1);
+INSERT INTO EMPLOYEE VALUES ('E'||LPAD(to_char(EMPLOYEE_SEQ.nextval), 9, '0'),'吳冠宏','M','David123','123',TO_DATE('2008-03-20','YYYY-MM-DD'),NULL,1);
 
 --------------------------------------------------------------------------------------------------------
---���T
---��x�\��
+--承豊
+--後台功能
 CREATE TABLE FEATURE (
   FEA_NO VARCHAR2(10) NOT NULL 
 , FEA_NAME VARCHAR2(20) NOT NULL 
@@ -578,25 +578,25 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'���x�Τ�޲z',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'���x���u�B�z',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'���a�f�֧@�~',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�f�֤峹���|',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�f�ֵ������|',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�f�����|�\�U',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'���ڼf�֧@�~',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'���ڧ@�~',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�޲z���n�J',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�q��h��',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�d�߭q�����',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�h�q�@�~',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�̷s�������@',NULL);
-INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'�^�к޲z',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'平台用戶管理',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'平台員工處理',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'店家審核作業',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'審核文章檢舉',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'審核評論檢舉',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'審核檢舉餐廳',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'提款審核作業',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'撥款作業',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'管理員登入',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'訂單退款',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'查詢訂位憑證',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'退訂作業',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'最新消息維護',NULL);
+INSERT INTO FEATURE VALUES ('F'||LPAD(to_char(FEATURE_SEQ.nextval), 3, '0'),'回覆管理',NULL);
 
 
 --------------------------------------------------------------------------------------------------------
---���T
---���u�\�����
+--承豊
+--員工功能明細
 CREATE TABLE FEATURE_DETAIL (
   FEA_NO VARCHAR2(10) NOT NULL 
 , EMP_NO VARCHAR2(10) NOT NULL 
@@ -613,8 +613,8 @@ INSERT INTO FEATURE_DETAIL VALUES ('F003','E000000001');
 
 
 --------------------------------------------------------------------------------------------------------
---���T
---�̷s����
+--承豊
+--最新消息
 CREATE TABLE NEWS (
   NEWS_NO VARCHAR2(10) NOT NULL 
 , EMP_NO VARCHAR2(10) NOT NULL 
@@ -632,14 +632,14 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000001','101���Ӥj���',NULL,TO_DATE('2019-03-28','YYYY-MM-DD'));
-INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000001','���e�������Y',NULL,TO_DATE('2018-03-28','YYYY-MM-DD'));
-INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000003','�Ҥ��ɩu',NULL,TO_DATE('2019-02-28','YYYY-MM-DD'));
-INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000003','�U�ѵ��A�Y',NULL,TO_DATE('2017-10-28','YYYY-MM-DD'));
-INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000005','�L�~�j�S��',NULL,TO_DATE('2019-03-08','YYYY-MM-DD'));
+INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000001','101跳樓大拍賣',NULL,TO_DATE('2019-03-28','YYYY-MM-DD'));
+INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000001','蜂蜜不甜砍頭',NULL,TO_DATE('2018-03-28','YYYY-MM-DD'));
+INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000003','帝王蟹季',NULL,TO_DATE('2019-02-28','YYYY-MM-DD'));
+INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000003','下麵給你吃',NULL,TO_DATE('2017-10-28','YYYY-MM-DD'));
+INSERT INTO NEWS VALUES ('N'||LPAD(to_char(NEWS_SEQ.nextval), 3, '0'),'E000000005','過年大特價',NULL,TO_DATE('2019-03-08','YYYY-MM-DD'));
 
 --------------------------------------------------------------------------------------------------------
---  �|�����]�������   �m��
+--  會員錢包收支明細   雋捷
 
 CREATE TABLE MEMBER_WALLET_LIST  (                              
   LIST_NO           VARCHAR2(10 BYTE) NOT NULL
@@ -656,12 +656,12 @@ CREATE TABLE MEMBER_WALLET_LIST  (
 
 );
 
-CREATE SEQUENCE MEMBER_WALLET_LIST_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                 -- �C���W�[�ƶq
-START WITH 1                   -- �q1�}�l
-NOMAXVALUE                     -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE MEMBER_WALLET_LIST_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                 -- 每次增加數量
+START WITH 1                   -- 從1開始
+NOMAXVALUE                     -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 INSERT INTO MEMBER_WALLET_LIST VALUES ('MWL'||LPAD(to_char(MEMBER_WALLET_LIST_SEQ.NEXTVAL), 7, '0')
     ,'M000001',sysdate,'5566',1,null,'20190330-000001');
@@ -677,7 +677,7 @@ INSERT INTO MEMBER_WALLET_LIST VALUES ('MWL'||LPAD(to_char(MEMBER_WALLET_LIST_SE
 
 --------------------------------------------------------------------------------------------------------
 
--- 13 �������|�M��   �m��
+-- 13 評論檢舉清單   雋捷
 CREATE TABLE COMMENT_REPORTED  (                                
   REP_NO            VARCHAR2(10 BYTE) NOT NULL
 , CMNT_NO           VARCHAR2(7 BYTE) 
@@ -694,31 +694,31 @@ CREATE TABLE COMMENT_REPORTED  (
 
 );
 --SEQUENCE 
-CREATE SEQUENCE COMMENT_REPORTED_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1                 -- �C���W�[�ƶq
-START WITH 1                   -- �q1�}�l
-NOMAXVALUE                     -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE COMMENT_REPORTED_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1                 -- 每次增加數量
+START WITH 1                   -- 從1開始
+NOMAXVALUE                     -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 INSERT INTO COMMENT_REPORTED VALUES ('CR'||LPAD(to_char(COMMENT_REPORTED_SEQ.NEXTVAL), 8, '0')
-    ,'C000001','M000001','���a�H�U���s�i�١H�o���κޤ@�U��',CURRENT_TIMESTAMP,1);
+    ,'C000001','M000001','挖靠？垃圾廣告欸？這不用管一下嗎',CURRENT_TIMESTAMP,1);
 
 INSERT INTO COMMENT_REPORTED VALUES ('CR'||LPAD(to_char(COMMENT_REPORTED_SEQ.NEXTVAL), 8, '0')
-    ,'C000002','M000002','�o�ڥ��O��L���c�N�Ӿx���a�H�̦n�ڭ̪������ѨS�����׳�I�ӥB�ٰ��껡�Y���������A�ک����������ڡH�޲z���X�ӭ���',CURRENT_TIMESTAMP,3);
+    ,'C000002','M000002','這根本是其他店惡意來鬧的吧？最好我們的牛肉麵沒有牛肉喔！而且還唬爛說吃到蟑螂咧，我明明有撈掉啊？管理員出來面對',CURRENT_TIMESTAMP,3);
 
 INSERT INTO COMMENT_REPORTED VALUES ('CR'||LPAD(to_char(COMMENT_REPORTED_SEQ.NEXTVAL), 8, '0')
-    ,'C000003','M000002','���O10���]��@�g�H�o���a���Ӫ��uŪ�ͧa�A�ڧڥh�Y���S���e�s���B�e�j���A�W����',CURRENT_TIMESTAMP,1);
+    ,'C000003','M000002','消費10元也算一篇？這店家派來的工讀生吧，啊我去吃怎麼沒有送龍蝦、送鮑魚，超唬爛',CURRENT_TIMESTAMP,1);
 
 INSERT INTO COMMENT_REPORTED VALUES ('CR'||LPAD(to_char(COMMENT_REPORTED_SEQ.NEXTVAL), 8, '0')
-    ,'C000004','M000002','�o�g�O�Ӷê��a?������|�K�O�a�����F��H�����\�U����pŢ�]��?',CURRENT_TIMESTAMP,2);
+    ,'C000004','M000002','這篇是來亂的吧?為什麼會貼別家店的東西？美式餐廳有賣小籠包喔?',CURRENT_TIMESTAMP,2);
 
 INSERT INTO COMMENT_REPORTED VALUES ('CR'||LPAD(to_char(COMMENT_REPORTED_SEQ.NEXTVAL), 8, '0')
-    ,'C000005','M000003','�g�o�g���f�l�����[�ڦn�͡A�����|�@�i',CURRENT_TIMESTAMP,1);
+    ,'C000005','M000003','寫這篇的妹子都不加我好友，怒檢舉一波',CURRENT_TIMESTAMP,1);
 
 
 --------------------------------------------------------------------------------------------------------
---�峹  �t��
+--文章  聖照
 
 CREATE TABLE ARTICLE_PUBLISHED(
     ART_NO      VARCHAR2(10)    NOT NULL
@@ -742,19 +742,19 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000001','���������������','   �ӥͲr���A�Y������!�o�a�����A�M�橱,�ϥηs�A����,�h�z�d�B�h�ߪ��������,�����~�ֶp��,�x�F�ܹ��жp�������ƶW������!!!
-        �ĤJ�F�s�A�j�z���M���������C�s���ߥ�,���Ǭ����ٳo�򹡺��j��!�ӥB�r�@�f�̭���������!!!',TO_DATE('2016-10-28','YYYY-MM-DD'),null,null,null,null,null,1);
+INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000001','甜滋滋的炸鳳尾蝦','   來生猛海鮮吃炸蝦啦!這家炸海鮮專賣店,使用新鮮海味,去腸泥、去殼的炸鳳尾蝦,炸的外皮酥脆,灑了很像鹹酥雞的香料超美味阿!!!
+        融入了新鮮大干貝和神秘香料釀製的漿汁,難怪炸完還這麼飽滿大顆!而且咬一口裡面水分飽飽!!!',TO_DATE('2016-10-28','YYYY-MM-DD'),null,null,null,null,null,1);
 
-INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000003','���_�������Y',' ���ѨӨ�P�ݶ}���ǻ������p�Y���S�O�Ӥ@�|�ǻ������������Y,�������Y���g�L���j�C�����E�ʤU���V��,�̭��R��������������,�r�U�h�Q�X�F���H���h�����ġC
-        �C�Y�L�@��,�ڴN�󦳰ʤO�gCODE�A�H��Y���D�ӫ����!!!!',TO_DATE('2018-10-28','YYYY-MM-DD'),null,null,null,null,null,1);
+INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000003','神奇撒尿牛丸',' 今天來到星爺開的傳說中的小吃店特別來一嚐傳說中的撒尿牛丸,美顆牛丸都經過晶姐每分鐘九百下的敲打,裡面充滿撒尿蝦的風味,咬下去噴出了難以忘懷的湯汁。
+        每吃過一次,我就更有動力寫CODE，以後吃不道該怎麼辦啊!!!!',TO_DATE('2018-10-28','YYYY-MM-DD'),null,null,null,null,null,1);
 
-INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000005','�S�s���Ȫe��',' ť���p���a���W�S�żp�v�H��,�ڴN�S�a�򤽥q�@���ǻ������Ȫe��,�ѱ��ĤJ�L�骺����,�R���F���v�����D�C
-        �W���x���F�öQ���ï]��,�ߤW�ӦY�u���i�H�ݨ�R���P�P���P�e',TO_DATE('2017-01-11','YYYY-MM-DD'),null,null,null,null,null,1);
-INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000002','���Q�Q���@����','    ��餤���j�Ǿǰϩ�,�@120�W,�`��500�U,�n�R�n��,���L�i����!!!',TO_DATE('2018-03-15','YYYY-MM-DD'),null,null,null,null,null,1);
-INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000004','�}���P�沱�b','     �C�ӤH���R�Y��,�ӳo�̤@�|�����P��M�\,�}�G��O�@�M�S�շL�H�������s,���ۦU�ؤf�����P��,���d�h�F��͡B����B�N�O�M��X���G�s�C,�̫��٦���u�R�ɦB,���ѦY�o�n����',TO_DATE('2019-02-17','YYYY-MM-DD'),null,null,null,null,null,1);
+INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000005','特製的銀河面',' 聽說小當家當上特級廚師以後,我就特地跟公司一嘗傳說中的銀河面,麵條融入無賊的墨汁,充滿了海洋的味道。
+        上面灑滿了珍貴的珍珠滿,晚上來吃真的可以看到充滿星星的星河',TO_DATE('2017-01-11','YYYY-MM-DD'),null,null,null,null,null,1);
+INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000002','香噴噴的咖哩飯','    桃園中央大學學區房,共120坪,總價500萬,要買要錯,錯過可惜喔!!!',TO_DATE('2018-03-15','YYYY-MM-DD'),null,null,null,null,null,1);
+INSERT INTO ARTICLE_PUBLISHED VALUES('AP'||LPAD(to_char(ARTPUB_SEQ.NEXTVAL),8,'0'),'M000004','繽紛鬆餅盛宴','     每個人都愛吃甜,來這裡一嚐美味鬆餅套餐,開胃菜是一杯特調微醺的雞尾酒,接著各種口味的鬆餅,有卡士達花生、草莓冰淇淋和綜合水果酒釀,最後還有手工愛玉冰,今天吃得好幸福',TO_DATE('2019-02-17','YYYY-MM-DD'),null,null,null,null,null,1);
 
 --------------------------------------------------------------------------------------------------------
---�峹���|�M��  �t��
+--文章檢舉清單  聖照
 
 CREATE TABLE ARTICLE_REPORTED(
     ARTRE_NO        VARCHAR2(10)    NOT NULL
@@ -777,14 +777,14 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000001','M000006','�̭����M�t����мs�i',TO_DATE('2017-01-11','YYYY-MM-DD'),1);
-INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000002','M000002','���o�رi�F,�̭������ï]��,�����u�O���q���}��',TO_DATE('2017-02-15','YYYY-MM-DD'),2);
-INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000003','M000005','�ڬO�өt�檺�H,�Q��ڦY���H���w��',TO_DATE('2017-01-11','YYYY-MM-DD'),3);
-INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000004','M000001','�u�W����ʤ���,�֨Ӱѥ[,�Y���@�d�U���ۧA��!!!',TO_DATE('2017-02-15','YYYY-MM-DD'),3);
-INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000005','M000002','���o�رi�F,�̭������ï]��,�����u�O���q���}��',TO_DATE('2017-02-15','YYYY-MM-DD'),2);
+INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000001','M000006','裡面竟然含有賣房廣告',TO_DATE('2017-01-11','YYYY-MM-DD'),1);
+INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000002','M000002','說得誇張了,裡面哪有珍珠粉,明明只是普通的糖粉',TO_DATE('2017-02-15','YYYY-MM-DD'),2);
+INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000003','M000005','我是個孤單的人,想找我吃飯隨時歡迎',TO_DATE('2017-01-11','YYYY-MM-DD'),3);
+INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000004','M000001','線上抽獎百分百,快來參加,頭獎一千萬等著你喔!!!',TO_DATE('2017-02-15','YYYY-MM-DD'),3);
+INSERT INTO ARTICLE_REPORTED VALUES('AR'||LPAD(to_char(ARTRE_SEQ.NEXTVAL),8,'0'),'AP00000005','M000002','說得誇張了,裡面哪有珍珠粉,明明只是普通的糖粉',TO_DATE('2017-02-15','YYYY-MM-DD'),2);
 
 --------------------------------------------------------------------------------------------------------
---��Ѭ���  �t��
+--聊天紀錄  聖照
 CREATE TABLE CHAT_RECORD(
     CHAT_NO     VARCHAR2(10)    NOT NULL
 ,   MEM_NO      VARCHAR2(7)     NOT NULL
@@ -803,21 +803,21 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','�w�w',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','安安',CURRENT_TIMESTAMP);
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','���o',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','哈囉',CURRENT_TIMESTAMP);
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','�P��񰲷Q��H�Y��,�p�n�Ӷ�?',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','周日放假想找人吃飯,妳要來嗎?',CURRENT_TIMESTAMP);
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','�n�ڭn�h����',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','好啊要去哪裡',CURRENT_TIMESTAMP);
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','�Aı�o���p�X���p��?',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000001','M000002','你覺得桃園小蒙牛如何?',CURRENT_TIMESTAMP);
 
-INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','�����A�����ڦҼ{�ݬ�',CURRENT_TIMESTAMP);
+INSERT INTO CHAT_RECORD VALUES('CH'||LPAD(to_char(CH_RE_SEQ.NEXTVAL),8,'0'),'M000002','M000001','恩恩，不錯我考慮看看',CURRENT_TIMESTAMP);
 
 --------------------------------------------------------------------------------------------------------
---�ȪA�O��   �t��
---�ȪA�O��   �t��
+--客服記錄   聖照
+--客服記錄   聖照
 CREATE TABLE CUSTOMER_SERVICE_RECORD(
     CUST_SER_NO     VARCHAR2(10)    NOT NULL
 ,   MEM_NO          VARCHAR2(7)     NOT NULL
@@ -837,20 +837,20 @@ NOMAXVALUE
 NOCYCLE
 NOCACHE;
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000001','E000000001','�z�n',NULL,CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000001','E000000001','您好',NULL,CURRENT_TIMESTAMP);
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000002','E000000002',NULL,'�z�n,�ܺa�����z�A��',CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000002','E000000002',NULL,'您好,很榮幸為您服務',CURRENT_TIMESTAMP);
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000003','E000000003','�ڦ��h�q�����D�n�ббz',NULL,CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000003','E000000003','我有退訂的問題要請教您',NULL,CURRENT_TIMESTAMP);
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000004','E000000004',NULL,'�����A�·бz�ԭz�z�����D?',CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000004','E000000004',NULL,'恩恩，麻煩您敘述您的問題?',CURRENT_TIMESTAMP);
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000005','E000000005','�ڥi�H�h�q�W�P�@���@���q���?',NULL,CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000005','E000000005','我可以退訂上周一的一份訂單嗎?',NULL,CURRENT_TIMESTAMP);
 
-INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000001','E000000001',NULL,'�ھڥ��O�W�w�X�Ѥ����i�H�i��h�w�q��',CURRENT_TIMESTAMP);
+INSERT INTO CUSTOMER_SERVICE_RECORD VALUES('CU'||LPAD(to_char(CU_SE_RE_SEQ.NEXTVAL),8,'0'),'M000001','E000000001',NULL,'根據平臺規定幾天內都可以進行退定訂單',CURRENT_TIMESTAMP);
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---�n�ͲM�� �t��
+--好友清單 聖照
 CREATE TABLE FRIEND_LIST(
     MEM_NO      VARCHAR2(7) NOT NULL
 ,   FRIE_NO     VARCHAR2(7) NOT NULL
@@ -866,7 +866,7 @@ INSERT INTO FRIEND_LIST VALUES('M000005','M000003',6);
 INSERT INTO FRIEND_LIST VALUES('M000004','M000006',7);
 INSERT INTO FRIEND_LIST VALUES('M000006','M000004',7);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---�\�U�^���M��  --�m��
+--餐廳回應清單  --雋捷
 CREATE TABLE RESTAURANT_RESPONSES  ( 								
   RES_NO			VARCHAR2(10 BYTE) NOT NULL
 , CMNT_NO			VARCHAR2(7 BYTE) NOT NULL 
@@ -878,31 +878,31 @@ CREATE TABLE RESTAURANT_RESPONSES  (
 
 );
 --SEQUENCE 
-CREATE SEQUENCE RESTAURANT_RESPONSES_SEQ     -- �@�Ӫ���u�|���@�Ӭy����,�ҥH�R�W�W��table_SEQ
-INCREMENT BY 1				   -- �C���W�[�ƶq
-START WITH 1				   -- �q1�}�l
-NOMAXVALUE					   -- �S���̤j��
-NOCYCLE                        -- ���`��
-NOCACHE;                       -- ���֨�,�����
+CREATE SEQUENCE RESTAURANT_RESPONSES_SEQ     -- 一個表格只會有一個流水號,所以命名規格table_SEQ
+INCREMENT BY 1				   -- 每次增加數量
+START WITH 1				   -- 從1開始
+NOMAXVALUE					   -- 沒有最大值
+NOCYCLE                        -- 不循環
+NOCACHE;                       -- 不快取,防止掉號
 
 INSERT INTO RESTAURANT_RESPONSES VALUES ('RR'||LPAD(to_char(RESTAURANT_RESPONSES_SEQ.NEXTVAL), 8, '0')
-	,'C000001','�P�¥��{�A�Ʊ�z�A�׻Y�{�������\�I',CURRENT_TIMESTAMP);
+	,'C000001','感謝光臨，希望您再度蒞臨本店用餐！',CURRENT_TIMESTAMP);
 
 INSERT INTO RESTAURANT_RESPONSES VALUES ('RR'||LPAD(to_char(RESTAURANT_RESPONSES_SEQ.NEXTVAL), 8, '0')
-	,'C000002','���±z���n���A�ܰ����z����w�ڭ̪��A�ȻP�\�I�@! ������~~',CURRENT_TIMESTAMP);
+	,'C000002','謝謝您的好評，很高興您能喜歡我們的服務與餐點哦! 祝順心~~',CURRENT_TIMESTAMP);
 
 
 INSERT INTO RESTAURANT_RESPONSES VALUES ('RR'||LPAD(to_char(RESTAURANT_RESPONSES_SEQ.NEXTVAL), 8, '0')
-	,'C000003','�P�±z�����лP����A�����@�����ӴN�O�ë��۵��ȤH�̦n�]�̦w�ߪ��\�I�A�õ��U�컫�ܦp�k�S�ŷx���A��',
+	,'C000003','感謝您的介紹與支持，本店一路走來就是秉持著給客人最好也最安心的餐點，並給各位賓至如歸又溫暖的服務',
 	CURRENT_TIMESTAMP);
 
 INSERT INTO RESTAURANT_RESPONSES VALUES ('RR'||LPAD(to_char(RESTAURANT_RESPONSES_SEQ.NEXTVAL), 8, '0')
-	,'C000004','���~�D�p�ǳƲ��h�s��γ��ŭ����A�N�O���F���z���Ѫ��]�ߡA�~�|�����÷f�t�M���s�A�֨ӻP�ڭ̦@�צ�v���H�`�a',
+	,'C000004','今年主廚準備眾多新菜及頂級食材，就是為了給您難忘的夜晚，品嚐美食並搭配杯美酒，快來與我們共度西洋情人節吧',
 	CURRENT_TIMESTAMP);
 
 INSERT INTO RESTAURANT_RESPONSES VALUES ('RR'||LPAD(to_char(RESTAURANT_RESPONSES_SEQ.NEXTVAL), 8, '0')
-	,'C000005','�Ҧ����A���A���D���A�����N�O�����F�A�Ӧb�饻�����h�O�Q�j�q�ϥΪ��������@�A�䤤�S�H�c����?�W�����̬��ά��M�ܡA
-	�O��Ź���D�`�߷R������',
+	,'C000005','所有海鮮中，味道最鮮美的就是貝類了，而在日本赤貝則是被大量使用的食材之一，其中又以宮城縣?上赤貝最為肥美清脆，
+	是老饕都非常喜愛的食材',
 	CURRENT_TIMESTAMP);
 
 
