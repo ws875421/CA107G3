@@ -24,7 +24,7 @@ public class MemberVo implements Serializable {
 
 	// 新增
 	public MemberVo(String mem_name, String mem_account, String mem_pwd, String mem_gender, String mem_mail,
-			String mem_id, String mem_tel, String mem_status, Double mem_balance, String mem_nickname) {
+			String mem_id, String mem_tel, String mem_status, byte[] mem_pic, Double mem_balance, String mem_nickname) {
 		super();
 		this.mem_name = mem_name;
 		this.mem_account = mem_account;
@@ -34,16 +34,9 @@ public class MemberVo implements Serializable {
 		this.mem_id = mem_id;
 		this.mem_tel = mem_tel;
 		this.mem_status = mem_status;
+		this.mem_pic = mem_pic;
 		this.mem_balance = mem_balance;
 		this.mem_nickname = mem_nickname;
-	}
-
-	public String getMem_no() {
-		return mem_no;
-	}
-
-	public void setMem_no(String mem_no) {
-		this.mem_no = mem_no;
 	}
 
 	// 更新
@@ -59,6 +52,14 @@ public class MemberVo implements Serializable {
 		this.mem_pic = mem_pic;
 		this.mem_balance = mem_balance;
 		this.mem_nickname = mem_nickname;
+	}
+
+	public String getMem_no() {
+		return mem_no;
+	}
+
+	public void setMem_no(String mem_no) {
+		this.mem_no = mem_no;
 	}
 
 	public String getMem_name() {
