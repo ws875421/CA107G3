@@ -17,7 +17,7 @@ public class MemberVo implements Serializable {
 	private Double mem_balance;
 	private String mem_nickname;
 
-	
+	//T
 	public MemberVo() {
 		super();
 		// TODO Auto-generated constructor stub
