@@ -8,6 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/BensonHsieh/Desktop/Rex/●已設定完成的Tomcat-9.0.8   (含資料庫Driver) (●useBodyEncodingForURI)/apache-tomcat-9.0.8/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Rex/Desktop/apache-tomcat-9.0.8/lib/ojdbc6.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
