@@ -34,6 +34,16 @@
 		<servlet-name>upImage</servlet-name>
 		<url-pattern>/Test/upImage.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>outImage2</servlet-name>
+		<servlet-class>com.member.model.outImage2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>outImage2</servlet-name>
+		<url-pattern>/member/outImage2.do</url-pattern>
+	</servlet-mapping>
+	
 
 
 	<servlet>

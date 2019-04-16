@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 public class MemberDAO implements MemberDAO_interface {
 
 	private static DataSource ds = null;
-	private static final String INSERT_STMT = "INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?,NULL,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO MEMBER VALUES ('M'||LPAD(to_char(member_seq.NEXTVAL), 6, '0'),?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE MEMBER SET MEM_NAME = ?, MEM_PWD = ?, MEM_GENDER = ?, MEM_TEL = ?, MEM_STATUS = ?,MEM_PIC = ? , MEM_BALANCE = ?, MEM_NICKNAME = ? WHERE MEM_ACCOUNT = ?";
 	private static final String DELETE = "DELETE FROM MEMBER WHERE MEM_NO =?";
 	private static final String GET_ONE_STMT = "SELECT * FROM MEMBER WHERE MEM_NO = ?";
@@ -43,7 +43,7 @@ public class MemberDAO implements MemberDAO_interface {
 
 		try {
 			con = ds.getConnection();
-			System.out.println("連線成功!");
+			System.out.println("連線成功DAO!");
 			pstm = con.prepareStatement(INSERT_STMT);
 			pstm.setString(1, memberVO.getMem_name());
 			pstm.setString(2, memberVO.getMem_account());
@@ -53,8 +53,9 @@ public class MemberDAO implements MemberDAO_interface {
 			pstm.setString(6, memberVO.getMem_id());
 			pstm.setString(7, memberVO.getMem_tel());
 			pstm.setString(8, memberVO.getMem_status());
-			pstm.setDouble(9, memberVO.getMem_balance());
-			pstm.setString(10, memberVO.getMem_nickname());
+			pstm.setBytes(9, memberVO.getMem_pic());
+			pstm.setDouble(10, memberVO.getMem_balance());
+			pstm.setString(11, memberVO.getMem_nickname());
 
 			rs = pstm.executeUpdate();
 			System.out.println("成功筆數 : " + rs);
@@ -188,6 +189,7 @@ public class MemberDAO implements MemberDAO_interface {
 				member.setMem_id(rs.getString(7));
 				member.setMem_tel(rs.getString(8));
 				member.setMem_status(rs.getString(9));
+				member.setMem_pic(rs.getBytes(10));
 				member.setMem_balance(rs.getDouble(11));
 				member.setMem_nickname(rs.getString(12));
 				// 裝入集合

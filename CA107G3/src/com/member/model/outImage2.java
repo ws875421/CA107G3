@@ -1,4 +1,4 @@
-package Test;
+package com.member.model;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 //@WebServlet("/outImage")
 
-public class outImage extends HttpServlet {
+public class outImage2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection con = null;
 	Statement stmt = null;
@@ -32,18 +32,20 @@ public class outImage extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
+		System.out.println("doPost");
 		res.setContentType("image/gif");
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
 			Statement stmt = con.createStatement();
-			String SQL = "SELECT PICTURE FROM EMP_PHOTO WHERE EMPNO = " + req.getParameter("EMPNO");
+			
+//						 SELECT MEM_PIC FROM MEMBER WHERE mem_no = 'M000011'
+			String SQL ="SELECT MEM_PIC FROM MEMBER WHERE mem_no =" + req.getParameter("mem_no");
 			System.out.println(SQL);
 			ResultSet rs = stmt.executeQuery(SQL);
 
 			if (rs.next()) {
-				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("PICTURE"));
+				BufferedInputStream in = new BufferedInputStream(rs.getBinaryStream("MEM_PIC"));
 				byte[] buf = new byte[4 * 1024]; // 4K buffer
 				int len;
 				while ((len = in.read(buf)) != -1) {
@@ -63,7 +65,7 @@ public class outImage extends HttpServlet {
 	public void init() throws ServletException {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "CA107", "123456");
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "CA107G3", "123456");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

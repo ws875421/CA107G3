@@ -57,7 +57,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstm.setString(7, memberVO.getMem_tel());
 			pstm.setString(8, memberVO.getMem_status());
 			pstm.setBytes(9, memberVO.getMem_pic());
-			System.out.println(memberVO.getMem_pic());
 			pstm.setDouble(10, memberVO.getMem_balance());
 			pstm.setString(11, memberVO.getMem_nickname());
 

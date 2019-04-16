@@ -67,7 +67,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" name="form1" enctype="multipart/form-data">
 <table>
 	<tr>
 		<td>員工姓名:</td>
@@ -86,7 +86,7 @@
 	</tr>
 	<tr>
 		<td>性別:</td>
-		<td>男<input type="checkbox" value="M" name="mem_gender"/> &nbsp; 女<input type="checkbox" value="F" "mem_gender"/>
+		<td>男<input type="radio" value="M" name="mem_gender"/> &nbsp; 女<input type="radio" value="F" name="mem_gender"/>
 		</td>
 	</tr>
 	<tr>
@@ -97,7 +97,7 @@
 	<tr>
 		<td>身分證:</td>
 		<td><input type="TEXT" name="mem_id" size="45" 
-			 value="<%= (memVO==null)? "A123456789" : memVO.getMem_id()%>" /></td>
+			 value="<%= (memVO==null)? "A222222222" : memVO.getMem_id()%>" /></td>
 	</tr>
 	<tr>
 		<td>電話:</td>
@@ -117,17 +117,22 @@
 		<td><input type="TEXT" name="mem_balance" size="45" 
 			 value="<%= (memVO==null)? "0" : memVO.getMem_balance()%>" readonly="readonly"/></td>
 	</tr>
-
-getMem_balance()
-getMem_nickname()
-
-
+	<tr>
+		<td>綽號:</td>
+		<td><input type="TEXT" name="mem_nickname" size="45" 
+			 value="<%= (memVO==null)? "王小明" : memVO.getMem_nickname()%>" /></td>
+	</tr>
+	<tr>
+		<td>大頭貼:</td>
+		<td><input type="file" name = "mem_pic"></td>
+	</tr>
 	
 
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+	<input type="hidden" name="action" value="insert">
+	<input type="submit" value="送出新增">
+</FORM>
 </body>
 
 
