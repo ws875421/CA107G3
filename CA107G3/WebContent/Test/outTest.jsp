@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
-	pageEncoding="BIG5"%>
+    pageEncoding="BIG5"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="Test/upImage.do" method="post"
-		enctype="multipart/form-data">
-		<input type="file" name = "file"> <input type="submit">
-	</form>
+<img src="<%= request.getContextPath()%>/Test/outImage.do?EMPNO=123">
 </body>
 </html>

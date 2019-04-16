@@ -1,7 +1,9 @@
 package Test;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 /**
- * Servlet implementation class upImage
+ * 資料庫上傳圖片
  */
 //@WebServlet("/upImage")
 
@@ -32,7 +34,7 @@ public class upImage extends HttpServlet {
 	private static final String SQL = "INSERT INTO EMP_PHOTO(EMPNO, PHOTO_FORMAT, PICTURE)" + "VALUES(?, ?, ?)";
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		System.out.println("doPost");
+		System.out.println("doGet");
 		doPost(req, res);
 	}
 
@@ -50,12 +52,19 @@ public class upImage extends HttpServlet {
 
 			InputStream in = null;
 			Collection<Part> parts = req.getParts();
-			
+
 			for (Part p : parts) {
 				System.out.println("###");
 				in = p.getInputStream();
-				pstmt.setString(1, "aa");
+				pstmt.setString(1, "123");
 				pstmt.setString(2, "bb");
+
+//				方法1:	VO 適用		
+//				byte[] buf = new byte[in.available()];
+//				in.read(buf);
+//				pstmt.setBytes(3,buf);
+				
+//				方法2:					
 				pstmt.setBinaryStream(3, in, in.available());
 			}
 

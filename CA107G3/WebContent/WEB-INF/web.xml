@@ -26,8 +26,6 @@
 		<servlet-name>MemberServlet</servlet-name>
 		<url-pattern>/member/member.do</url-pattern>
 	</servlet-mapping>
-
-
 	<servlet>
 		<servlet-name>upImage</servlet-name>
 		<servlet-class>Test.upImage</servlet-class>
@@ -36,5 +34,16 @@
 		<servlet-name>upImage</servlet-name>
 		<url-pattern>/Test/upImage.do</url-pattern>
 	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>outImage</servlet-name>
+		<servlet-class>Test.outImage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>outImage</servlet-name>
+		<url-pattern>/Test/outImage.do</url-pattern>
+	</servlet-mapping>
+
 
 </web-app>
