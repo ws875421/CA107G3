@@ -61,14 +61,14 @@
     </FORM>
   </li>
 
-<%--   <jsp:useBean id="empSvc" scope="page" class="com.emp.model.EmpService" /> --%>
+  <jsp:useBean id="memSvc" scope="page" class="com.member.model.MemberService" />
    
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
-       <b>選擇員工編號:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.empno}
+     <FORM METHOD="post" ACTION="member.do" >
+       <b>選擇會員編號:</b>
+       <select size="1" name="mem_no">
+         <c:forEach var="memVO" items="${memSvc.all}" > 
+          <option value="${memVO.mem_no}">${memVO.mem_no}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -77,11 +77,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="emp.do" >
-       <b>選擇員工姓名:</b>
-       <select size="1" name="empno">
-         <c:forEach var="empVO" items="${empSvc.all}" > 
-          <option value="${empVO.empno}">${empVO.ename}
+     <FORM METHOD="post" ACTION="member.do" >
+       <b>選擇會員姓名:</b>
+       <select size="1" name="mem_no">
+         <c:forEach var="memVO" items="${memSvc.all}" > 
+          <option value="${memVO.mem_no}">${memVO.mem_name}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

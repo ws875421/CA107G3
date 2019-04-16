@@ -1,6 +1,7 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,14 +108,20 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public static void main(String[] args) {
-		String pattern = "^[A-Za-z]{1}[0-9]{7}$";
-		String str = "M0000001";
-
-		if (str.matches(pattern)) {
-			System.out.println("y");
-			return;
-		}
-		System.out.println("e");
+//		String pattern = "^[A-Za-z]{1}[0-9]{7}$";
+//		String str = "M0000001";
+//
+//		if (str.matches(pattern)) {
+//			System.out.println("y");
+//			return;
+//		}
+//		System.out.println("e");
+		
+		System.currentTimeMillis();
+		System.out.println(new Date(System.currentTimeMillis()));
+		
+		
+		
 
 	}
 }
