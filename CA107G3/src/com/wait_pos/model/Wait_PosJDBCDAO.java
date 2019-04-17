@@ -194,17 +194,18 @@ public class Wait_PosJDBCDAO implements Wait_PosDAO_interface {
 //		wDAO.update(wp1);
 
 		// 兩個方法都可以
-//		long t = System.currentTimeMillis();
-//		java.sql.Timestamp sqltime = new java.sql.Timestamp(t);
-//		System.out.println(sqltime);
+		long t = System.currentTimeMillis();
+		java.sql.Timestamp sqltime = new java.sql.Timestamp(t);
+		System.out.println(sqltime);
 
 		java.util.Date date = new java.util.Date();
 		java.sql.Timestamp timestamp = new java.sql.Timestamp(date.getTime());
 		System.out.println(timestamp);
+		
 
 		// 新增資料
-		Wait_PosVo wp1 = new Wait_PosVo("M000004", "V000004", 7, 6, timestamp, 5, 4);
-		wDAO.insert(wp1);
+//		Wait_PosVo wp1 = new Wait_PosVo("M000004", "V000004", 7, 6, timestamp, 5, 4);
+//		wDAO.insert(wp1);
 
 	}
 }

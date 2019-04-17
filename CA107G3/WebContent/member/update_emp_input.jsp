@@ -1,9 +1,10 @@
+<%@page import="com.member.model.MemberVo"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.emp.model.*"%>
+
 
 <%
-  EmpVO empVO = (EmpVO) request.getAttribute("empVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+	MemberVo memVO = (MemberVo) request.getAttribute("memberVo"); //EmpServlet.java(Concroller), 存入req的empVO物件
 %>
 
 <html>
@@ -48,7 +49,7 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料修改 - update_emp_input.jsp</h3>
+		 <h3>會員資料修改 - update_emp_input.jsp</h3>
 		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
@@ -65,47 +66,82 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" name="form1" enctype="multipart/form-data">
+
+
 <table>
 	<tr>
-		<td>員工編號:<font color=red><b>*</b></font></td>
-		<td><%=empVO.getEmpno()%></td>
+		<td>會員編號:<font color=red><b>*</b></font></td>
+		<td><%=memVO.getMem_no()%></td>
 	</tr>
+
+
 	<tr>
 		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" value="<%=empVO.getEname()%>" /></td>
+		<td><input type="TEXT" name="mem_name" size="45" 
+			 value="<%= (memVO==null)? "吳永志" : memVO.getMem_name()%>" /></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"	value="<%=empVO.getJob()%>" /></td>
+		<td>會員帳號:</td>
+		<td><input type="TEXT" name="mem_account" size="45" 
+			 value="<%= (memVO==null)? "qaz12345" : memVO.getMem_account()%>" readonly="readonly" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text" ></td>
+		<td>會員密碼:</td>
+		<td><input type="TEXT" name="mem_pwd" size="45" 
+			 value="<%= (memVO==null)? "qaz12345" : memVO.getMem_pwd()%>" /></td>
 	</tr>
 	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=empVO.getSal()%>" /></td>
+		<td>性別:</td>
+		<td><input type="TEXT" name="mem_gender" value="<%= (memVO.getMem_gender().equals("M"))? "男" : "女"%>" />
+		</td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=empVO.getComm()%>" /></td>
+		<td>信箱:</td>
+		<td><input type="TEXT" name="mem_mail" size="45" 
+			 value="<%= (memVO==null)? "qaz12345@gmail.com" : memVO.getMem_mail()%>"  readonly="readonly"/></td>
+	</tr>
+	<tr>
+		<td>身分證:</td>
+		<td><input type="TEXT" name="mem_id" size="45" 
+			 value="<%= (memVO==null)? "A222222222" : memVO.getMem_id()%>"  readonly="readonly"/></td>
+	</tr>
+	<tr>
+		<td>電話:</td>
+		<td><input type="TEXT" name="mem_tel" size="45" 
+			 value="<%= (memVO==null)? "0912345678" : memVO.getMem_tel()%>" /></td>
+	</tr>
+	<tr>
+		<td>狀態:</td>
+		<td><input type="TEXT" name="mem_status" size="45" 
+			 value="<%= (memVO==null)? "1" : memVO.getMem_status()%>" readonly="readonly"/></td>
 	</tr>
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
+
+<!-- getMem_pic() -->
 	<tr>
-		<td>部門:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
-			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(empVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname}
-			</c:forEach>
-		</select></td>
+		<td>錢包餘額:</td>
+		<td><input type="TEXT" name="mem_balance" size="45" 
+			 value="<%= (memVO==null)? "0" : memVO.getMem_balance()%>" readonly="readonly"/></td>
 	</tr>
+	<tr>
+		<td>綽號:</td>
+		<td><input type="TEXT" name="mem_nickname" size="45" 
+			 value="<%= (memVO==null)? "王小明" : memVO.getMem_nickname()%>" /></td>
+	</tr>
+	<tr>
+		<td>大頭貼:</td>
+		<td><input type="file" name = "mem_pic"></td>
+	</tr>
+	
 
 </table>
+
+
+
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=empVO.getEmpno()%>">
+<input type="hidden" name="mem_no" value="<%=memVO.getMem_no()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -113,6 +149,14 @@
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
+<%-- <%  --%>
+<!-- //   java.sql.Date hiredate = null; -->
+<!-- //   try { -->
+<!-- // 	    hiredate = empVO.getHiredate(); -->
+<!-- //    } catch (Exception e) { -->
+<!-- // 	    hiredate = new java.sql.Date(System.currentTimeMillis()); -->
+<!-- //    } -->
+<%-- %> --%>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -127,18 +171,18 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=empVO.getHiredate()%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-           //startDate:	            '2017/07/10',  // 起始日
-           //minDate:               '-1970-01-01', // 去除今日(不含)之前
-           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-        });
+//         $.datetimepicker.setLocale('zh');
+//         $('#f_date1').datetimepicker({
+// 	       theme: '',              //theme: 'dark',
+// 	       timepicker:false,       //timepicker:true,
+// 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+// 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+<%-- 		   value: '<%=hiredate%>', // value:   new Date(), --%>
+//            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+//            //startDate:	            '2017/07/10',  // 起始日
+//            //minDate:               '-1970-01-01', // 去除今日(不含)之前
+//            //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+//         });
         
         
    

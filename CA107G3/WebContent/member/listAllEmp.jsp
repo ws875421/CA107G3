@@ -103,7 +103,7 @@
 			<td>${memberVo.mem_id}</td>
 			<td>${memberVo.mem_tel}</td>
 			<td>${memberVo.mem_status}</td>
-			<td><img  src="<%= request.getContextPath()%>/member/outImage2.do?mem_no='${memberVo.mem_no}'"></td>
+			<td><img  src="<%= request.getContextPath()%>/member/outImage2.do?mem_no=${memberVo.mem_no}"></td>
 			<td>${memberVo.mem_balance}</td>
 			<td>${memberVo.mem_nickname}</td>
 	
@@ -126,7 +126,7 @@
 <%@ include file="page2.file" %>
 
 
-</form>
+
 
 </body>
 </html>

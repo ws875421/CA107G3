@@ -30,7 +30,7 @@
 
 <style>
   table {
-	width: 1000px;
+	width: 1200px;
 	background-color: white;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -66,22 +66,25 @@
 		<th>身分證</th>
 		<th>電話</th>
 		<th>狀態</th>
+		<th>大頭貼</th>
 		<th>錢包餘額</th>
 		<th>綽號</th>
 
+
 	</tr>
 	<tr>
-		<td>		<%=memberVo.getMem_no()%> 				</td>
-		<td>		<%=memberVo.getMem_name()%> 			</td>
-		<td>		<%=memberVo.getMem_account()%> 			</td>
-		<td>		<%=memberVo.getMem_pwd()%> 				</td>
-		<td>		<%=memberVo.getMem_gender().equals("M")?"男":"女"%> 			</td>
-		<td>		<%=memberVo.getMem_mail()%> 			</td>
-		<td>		<%=memberVo.getMem_id()%> 				</td>
-		<td>		<%=memberVo.getMem_tel()%> 				</td>
-		<td>		<%=memberVo.getMem_status()%> 			</td>
-		<td>		<%=memberVo.getMem_balance()%> 			</td>
-		<td>		<%=memberVo.getMem_nickname()%> 		</td>
+			<td>${memberVo.mem_no}</td>
+			<td>${memberVo.mem_name}</td>
+			<td>${memberVo.mem_account}</td>
+			<td>${memberVo.mem_pwd}</td>
+			<td>${(memberVo.mem_gender=='M')? '男':'女'}</td>
+			<td>${memberVo.mem_mail}</td>
+			<td>${memberVo.mem_id}</td>
+			<td>${memberVo.mem_tel}</td>
+			<td>${memberVo.mem_status}</td>
+			<td><img  src="<%= request.getContextPath()%>/member/outImage2.do?mem_no=${memberVo.mem_no}"></td>
+			<td>${memberVo.mem_balance}</td>
+			<td>${memberVo.mem_nickname}</td>
 	</tr>
 </table>
 
