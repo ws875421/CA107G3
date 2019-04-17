@@ -32,6 +32,7 @@ public class MemberService {
 	}
 
 	public MemberVo updateMem_no(MemberVo memberVo) {
+
 //
 //		MemberVo memberVo = new MemberVo();
 //		
@@ -50,6 +51,7 @@ public class MemberService {
 //		vo.setMem_pic(mem_pic);
 //		System.out.println(memberVo);
 
+		
 		dao.update(memberVo);
 		return memberVo;
 	}

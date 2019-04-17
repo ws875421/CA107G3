@@ -44,6 +44,7 @@ public class MemberDAO implements MemberDAO_interface {
 		try {
 			con = ds.getConnection();
 //			System.out.println("連線成功DAO!");
+
 			pstm = con.prepareStatement(INSERT_STMT);
 			pstm.setString(1, memberVO.getMem_name());
 			pstm.setString(2, memberVO.getMem_account());
@@ -97,7 +98,7 @@ public class MemberDAO implements MemberDAO_interface {
 			pstm.setDouble(6, memberVO.getMem_balance());
 			pstm.setString(7, memberVO.getMem_nickname());
 			pstm.setBytes(8, memberVO.getMem_pic());
-
+			System.out.println("@" + memberVO.getMem_pic());
 			pstm.setString(9, memberVO.getMem_account());
 
 			rs = pstm.executeUpdate();
@@ -107,7 +108,7 @@ public class MemberDAO implements MemberDAO_interface {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -136,7 +137,7 @@ public class MemberDAO implements MemberDAO_interface {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -173,7 +174,7 @@ public class MemberDAO implements MemberDAO_interface {
 				member.setMem_id(rs.getString(7));
 				member.setMem_tel(rs.getString(8));
 				member.setMem_status(rs.getString(9));
-				// member.setMem_pic();
+				member.setMem_pic(rs.getBytes(10));
 				member.setMem_balance(rs.getDouble(11));
 				member.setMem_nickname(rs.getString(12));
 			}
@@ -182,7 +183,7 @@ public class MemberDAO implements MemberDAO_interface {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {
@@ -228,7 +229,7 @@ public class MemberDAO implements MemberDAO_interface {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				con.close();
 			} catch (SQLException e) {

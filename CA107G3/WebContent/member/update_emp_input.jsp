@@ -131,7 +131,7 @@
 	</tr>
 	<tr>
 		<td>§j¿Y∂K:</td>
-		<td><input type="file" name = "mem_pic"></td>
+		<td><input type="file" name = "mem_pic" value="<%= (memVO==null)? "null" : memVO.getMem_pic()%>"></td>
 	</tr>
 	
 
